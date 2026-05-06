@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabriel Virto | Aerospace Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0b0b0a;
+  --bg-2:      #131312;
+  --bg-3:      #1b1b19;
+  --border:    rgba(255,255,255,0.07);
+  --border-md: rgba(255,255,255,0.13);
+  --border-hi: rgba(255,255,255,0.2);
+  --text:      #edeae3;
+  --text-2:    #948f87;
+  --text-3:    #4e4b45;
+  --accent:    #c9b99a;
+  --accent-mid:rgba(201,185,154,0.25);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg); color: var(--text);
+  font-size: 15px; line-height: 1.7; min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-md); border-radius: 2px; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 66px;
+  background: rgba(11,11,10,0.74); backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-name {
+  font-family: 'DM Serif Display', serif; font-size: 1.05rem;
+  color: var(--text); text-decoration: none; letter-spacing: 0.02em;
+}
+.nav-name span { color: var(--accent); font-style: italic; }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.72rem; color: var(--text-2); text-decoration: none;
+  letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-socials { display: flex; align-items: center; gap: 0.55rem; }
+.nav-socials a {
+  min-width: 31px; height: 31px; padding: 0 0.7rem;
+  border: 1px solid var(--border); border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-2); text-decoration: none;
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s;
+}
+.nav-socials a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-mid); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 7rem 3rem 4.5rem; position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 18% 25%, rgba(201,185,154,0.12), transparent 27%),
+    radial-gradient(circle at 84% 18%, rgba(255,255,255,0.055), transparent 24%),
+    linear-gradient(135deg, var(--bg) 0%, #10100f 52%, #080807 100%);
+}
+.hero::before {
+  content: ''; position: absolute; inset: 66px 0 0;
+  background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 72px 72px; mask-image: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent 82%);
+  pointer-events: none;
+}
+.hero-bg-text {
+  position: absolute; top: 49%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'DM Serif Display', serif; font-size: clamp(8rem, 19vw, 22rem);
+  color: rgba(255,255,255,0.022); white-space: nowrap;
+  pointer-events: none; user-select: none; letter-spacing: -0.04em;
+}
+.hero-inner {
+  max-width: 1260px; width: 100%; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 460px);
+  gap: clamp(2.4rem, 6vw, 5.5rem); align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-col-name { opacity: 0; animation: fadeUp 0.75s 0.12s forwards; }
+.hero-label {
+  display: inline-flex; align-items: center; gap: 0.65rem;
+  font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--accent);
+  letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.35rem;
+  opacity: 0.95;
+}
+.hero-label::before { content: ''; width: 36px; height: 1px; background: var(--accent); opacity: 0.65; }
+.hero-name {
+  font-family: 'DM Serif Display', serif; font-size: clamp(4.2rem, 8.8vw, 8.9rem);
+  line-height: 0.88; color: var(--text); letter-spacing: -0.055em; margin-bottom: 1.4rem;
+}
+.hero-name em { font-style: italic; color: var(--accent); letter-spacing: -0.035em; }
+.hero-subtitle {
+  max-width: 690px; font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+  color: var(--text); font-weight: 300; line-height: 1.55; margin-bottom: 1.05rem;
+}
+.hero-subtitle strong { color: var(--accent); font-weight: 400; }
+.hero-tagline {
+  max-width: 650px; font-size: 0.96rem; color: var(--text-2); font-weight: 300; line-height: 1.9;
+  margin-bottom: 2rem; border-left: 1px solid var(--accent-mid); padding-left: 1.2rem;
+}
+.hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.74rem 1.3rem; font-size: 0.72rem; font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.11em; text-transform: uppercase; text-decoration: none;
+  border-radius: 999px; transition: all 0.22s; cursor: pointer; border: none; font-weight: 500;
+}
+.btn-primary { background: var(--accent); color: #0b0b0a; box-shadow: 0 15px 40px rgba(201,185,154,0.14); }
+.btn-primary:hover { background: #ddd0ba; transform: translateY(-2px); }
+.btn-ghost { background: rgba(255,255,255,0.025); color: var(--text-2); border: 1px solid var(--border-md); }
+.btn-ghost:hover { color: var(--text); border-color: var(--accent-mid); transform: translateY(-2px); }
+.hero-highlights { display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 1px; max-width: 720px; background: var(--border); border: 1px solid var(--border); }
+.hero-highlight { background: rgba(11,11,10,0.72); padding: 1rem 1.05rem; }
+.hero-highlight span { display: block; font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.35rem; }
+.hero-highlight strong { display: block; font-size: 0.82rem; color: var(--text); line-height: 1.45; font-weight: 400; }
+.hero-col-photo { opacity: 0; animation: fadeUp 0.75s 0.28s forwards; }
+.hero-portrait-card {
+  position: relative; padding: 1.15rem; border: 1px solid var(--border-md);
+  background: linear-gradient(145deg, rgba(255,255,255,0.055), rgba(255,255,255,0.014));
+  box-shadow: 0 35px 90px rgba(0,0,0,0.36);
+  max-width: 300px;
+  max-height: 500px;
+  margin-left: auto;
+}
+.hero-portrait-card::before {
+  content: ''; position: absolute; right: -18px; top: -18px; width: 120px; height: 120px;
+  border-top: 1px solid var(--accent-mid); border-right: 1px solid var(--accent-mid); opacity: 0.9;
+}
+.hero-photo-rect {
+  width: 100%;
+  max-width: 280px;
+  
+  max-height: 400px;
+
+  object-fit: cover;
+  object-position: center top;
+
+  border-radius: 8px;
+
+  filter: contrast(1.03) brightness(1.02);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(255,255,255,0.06);
+
+  transition: all 0.35s ease;
+}
+.hero-portrait-card:hover .hero-photo-rect { transform: translateY(-4px);
+  filter: contrast(1.06) brightness(1.04); }
+.hero-photo-caption {
+  display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.9rem;
+  font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--text-2);
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.hero-status { color: var(--accent); }
+.hero-meta { display: none; }
+
+/* SECTIONS */
+.section-wrap { border-bottom: 1px solid var(--border); }
+section { padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
+.section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; }
+.section-num {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  color: var(--text-3); letter-spacing: 0.2em;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif; font-size: 1.9rem;
+  color: var(--text); line-height: 1.2;
+}
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 5fr 4fr; gap: 4rem; align-items: start; }
+.about-text p {
+  color: var(--text-2); font-size: 0.9rem; line-height: 1.95;
+  margin-bottom: 1rem; font-weight: 300;
+}
+.about-text a {
+  color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid var(--accent-mid); transition: border-color 0.2s;
+}
+.about-text a:hover { border-color: var(--accent); }
+.lang-strip { display: flex; gap: 1.75rem; margin-top: 2rem; flex-wrap: wrap; }
+.lang-item { display: flex; flex-direction: column; gap: 0.15rem; }
+.lang-name { font-size: 0.82rem; color: var(--text); font-weight: 400; }
+.lang-level {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  color: var(--text-3); letter-spacing: 0.12em; text-transform: uppercase;
+}
+.tools-block { display: flex; flex-direction: column; gap: 1.5rem; }
+.tool-group-label {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--text-3);
+  letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.55rem;
+}
+.pill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.pill {
+  font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-2);
+  letter-spacing: 0.04em; border: 1px solid var(--border); border-radius: 2px;
+  padding: 0.28rem 0.65rem; transition: all 0.2s;
+}
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+
+/* EXPERIENCE */
+.exp-list { display: flex; flex-direction: column; }
+.exp-item {
+  display: grid; grid-template-columns: 170px 1fr; gap: 2.5rem;
+  padding: 2.25rem 0; border-bottom: 1px solid var(--border);
+}
+.exp-item:first-child { padding-top: 0; }
+.exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+.exp-period {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--text-3);
+  letter-spacing: 0.08em; margin-bottom: 0.4rem; line-height: 1.5;
+}
+.exp-company { font-size: 0.82rem; color: var(--accent); margin-bottom: 0.2rem; }
+.exp-location { font-size: 0.75rem; color: var(--text-3); font-weight: 300; }
+.exp-role {
+  font-family: 'DM Serif Display', serif; font-size: 1.1rem;
+  color: var(--text); margin-bottom: 0.85rem; line-height: 1.3;
+}
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+.exp-bullets li {
+  font-size: 0.83rem; color: var(--text-2); line-height: 1.75;
+  font-weight: 300; padding-left: 1.1rem; position: relative;
+}
+.exp-bullets li::before {
+  content: '—'; position: absolute; left: 0;
+  color: var(--text-3); font-size: 0.7rem; top: 2px;
+}
+
+/* PROJECTS */
+.projects-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.project-card {
+  background: var(--bg); padding: 1.65rem;
+  transition: background 0.2s; text-decoration: none; display: block;
+}
+.project-card:hover { background: var(--bg-2); }
+.project-year {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  color: var(--text-3); letter-spacing: 0.12em; margin-bottom: 0.75rem;
+}
+.project-tag {
+  font-size: 0.68rem; color: var(--accent); letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 0.4rem; display: block;
+}
+.project-title {
+  font-family: 'DM Serif Display', serif; font-size: 1rem;
+  color: var(--text); line-height: 1.35; margin-bottom: 0.6rem;
+}
+.project-desc { font-size: 0.8rem; color: var(--text-3); line-height: 1.65; font-weight: 300; }
+
+/* EDUCATION */
+.edu-list { display: flex; flex-direction: column; }
+.edu-item {
+  display: grid; grid-template-columns: 170px 1fr; gap: 2.5rem;
+  padding: 1.75rem 0; border-bottom: 1px solid var(--border);
+}
+.edu-item:first-child { padding-top: 0; }
+.edu-item:last-child { border-bottom: none; padding-bottom: 0; }
+.edu-period {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  color: var(--text-3); letter-spacing: 0.08em; padding-top: 4px;
+}
+.edu-degree {
+  font-family: 'DM Serif Display', serif; font-size: 1.1rem;
+  color: var(--text); margin-bottom: 0.25rem; line-height: 1.3;
+}
+.edu-school { font-size: 0.82rem; color: var(--accent); margin-bottom: 0.35rem; }
+.edu-thesis {
+  font-size: 0.8rem; color: var(--text-3); font-style: italic; font-weight: 300; line-height: 1.65;
+}
+.teams-label {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--text-3);
+  letter-spacing: 0.18em; text-transform: uppercase; margin: 3rem 0 1.5rem;
+}
+.teams-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.team-card { background: var(--bg); padding: 1.4rem; }
+.team-period {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  color: var(--text-3); letter-spacing: 0.12em; margin-bottom: 0.5rem;
+}
+.team-name { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-bottom: 0.2rem; }
+.team-role {
+  font-size: 0.72rem; color: var(--accent); letter-spacing: 0.07em;
+  text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.team-desc { font-size: 0.8rem; color: var(--text-3); line-height: 1.65; font-weight: 300; }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.contact-text { font-size: 0.9rem; color: var(--text-2); line-height: 1.9; font-weight: 300; }
+.contact-links { display: flex; flex-direction: column; }
+.contact-row {
+  display: flex; align-items: center; gap: 1.25rem; padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border); font-size: 0.85rem; color: var(--text-2);
+  text-decoration: none; transition: color 0.2s;
+}
+.contact-row:last-child { border-bottom: none; }
+.contact-row:hover { color: var(--text); }
+.contact-row-key {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--text-3);
+  letter-spacing: 0.14em; text-transform: uppercase; min-width: 56px;
+}
+
+/* FOOTER */
+footer {
+  padding: 1.75rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--border);
+}
+.footer-name { font-family: 'DM Serif Display', serif; font-size: 0.9rem; color: var(--text-3); }
+.footer-copy {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  color: var(--text-3); letter-spacing: 0.1em;
+}
+
+
+/* PHOTO STYLES */
+.hero-name-photo {
+  display: flex; align-items: flex-end; gap: 1.75rem;
+}
+.hero-photo-rect {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid var(--border-md);
+  border-radius: 8px;
+  display: block;
+  filter: contrast(1.04) brightness(1.03);
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+.hero-photo-rect:hover { filter: contrast(1.06) brightness(1.05); }
+
+.contact-grid-3col {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr) 300px;
+  gap: 3rem;
+  align-items: center;
+}
+.contact-photo-col { flex-shrink: 0; align-self: center; justify-self: end; }
+.contact-photo-inner { position: relative; display: inline-block; }
+.contact-photo {
+  width: 300px;
+  height: 390px;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 1px solid var(--border-md);
+  border-radius: 8px;
+  display: block;
+  filter: contrast(1.04) brightness(1.03);
+  box-shadow:
+    0 24px 65px rgba(0,0,0,0.44),
+    0 0 0 1px rgba(255,255,255,0.06);
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+.contact-photo:hover { transform: translateY(-4px); filter: contrast(1.06) brightness(1.05); }
+.contact-photo-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 0.5rem 0.85rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.65));
+  font-family: "DM Mono", monospace; font-size: 0.62rem;
+  color: rgba(255,255,255,0.5); letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+/* IMPROVED READABILITY for meta labels / dates */
+.hero-meta-label {
+  font-family: "DM Mono", monospace; font-size: 0.62rem;
+  color: rgba(201,185,154,0.55) !important;
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+.hero-meta-val {
+  font-size: 0.85rem; color: var(--text) !important; font-weight: 400;
+}
+.exp-period, .edu-period, .team-period, .project-year {
+  color: var(--text-2) !important;
+  font-size: 0.7rem !important;
+}
+.exp-company, .edu-school, .team-role, .project-tag {
+  font-size: 0.8rem;
+}
+.section-num { color: var(--accent) !important; opacity: 0.5; }
+.hero-label { color: var(--accent) !important; opacity: 0.75; }
+.tool-group-label, .contact-row-key, .lang-level, .teams-label {
+  color: var(--text-2) !important; opacity: 0.75;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .hero { padding: 0 1.5rem 4rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero { align-items: flex-end; padding-top: 6rem; }
+  .hero-photo-rect { height: min(72vh, 520px); }
+  .hero-portrait-card { max-width: 420px; margin: 0; }
+  .contact-grid-3col { grid-template-columns: 1fr; align-items: start; }
+  .contact-photo-col { justify-self: start; }
+  .contact-photo { width: min(100%, 320px); height: 410px; }
+  .hero-highlights { grid-template-columns: 1fr; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+  .teams-grid { grid-template-columns: 1fr; }
+  .hero-bg-text { display: none; }
+  footer { flex-direction: column; gap: 0.75rem; padding: 1.5rem; text-align: center; }
+}
+@media (max-width: 540px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .hero { padding: 5.5rem 1.1rem 3rem; }
+  .hero-name { font-size: clamp(3.5rem, 19vw, 5rem); }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-photo-rect { height: 390px; }
+  .contact-photo { width: 100%; height: 360px; }
+  .nav-socials a:first-child { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Gabriel <span>Virto</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-socials">
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=gabrielvirtoch@gmail.com" target="_blank" title="Email"> Email ↗</a>
+    <a href="https://github.com/gabrielvirto/gabriel.git" target="_blank" title="Portfolio">Portfolio ↗</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg-text">Aerospace</div>
+  <div class="hero-inner">
+
+    <div class="hero-col-name">
+      <div class="hero-label">M.Sc. Aerospace Engineering · TU Munich</div>
+      <h1 class="hero-name">Gabriel<br><em>Virto</em></h1>
+      <p class="hero-subtitle">
+        <strong>Thermal-fluid systems, CFD &amp; model-based engineering.</strong>
+      </p>
+      <p class="hero-tagline">
+        Simulation-driven design for aerospace and automotive propulsion — from system-level modelling to high-fidelity CFD.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">Explore Projects →</a>
+        <a href="#experience" class="btn btn-ghost">View Experience</a>
+        <a href="#contact" class="btn btn-ghost">Contact Me</a>
+      </div>
+      <div class="hero-highlights" aria-label="Profile highlights">
+        <div class="hero-highlight"><span>Based in</span><strong>Munich, Germany</strong></div>
+        <div class="hero-highlight"><span>Currently</span><strong>BMW AG </strong></div>
+        <div class="hero-highlight"><span>Focus</span><strong>CFD · FEA · CAD · Thermal - Fluid Systems</strong></div>
+      </div>
+    </div>
+
+    <div class="hero-col-photo">
+      <div class="hero-portrait-card">
+      <img src="images/gabriel_foto.png" alt="Gabriel Virto" class="hero-photo-rect">
+        <div class="hero-photo-caption">
+          <span>Aerospace Engineer</span>
+          <span class="hero-status">Open to opportunities</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section-wrap">
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01 —</span>
+    <h2 class="section-title">About</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>M.Sc. Aerospace Engineering student at the Technical University of Munich, specialising in thermal-fluid systems, CFD, and model-based engineering. Currently working at BMW Group as a simulation engineer in R&amp;D Power Systems.</p>
+      <p>My experience spans system-level thermal-electrical modelling in Modelica/Dymola, high-fidelity CFD with ANSYS and STAR-CCM+, and data-driven approaches including neural ODE system identification. I'm passionate about thermal engineering and propulsion, and applying advanced simulation methods to real aerospace problems.</p>
+      <p>Open to research collaborations and engineering discussions — feel free to <a href="#contact">reach out</a>.</p>
+      <div class="lang-strip">
+        <div class="lang-item"><span class="lang-name">Spanish</span><span class="lang-level">Native</span></div>
+        <div class="lang-item"><span class="lang-name">German</span><span class="lang-level">C1</span></div>
+        <div class="lang-item"><span class="lang-name">English</span><span class="lang-level">C1</span></div>
+        <div class="lang-item"><span class="lang-name">Italian</span><span class="lang-level">A2</span></div>
+      </div>
+    </div>
+    <div class="tools-block">
+      <div>
+        <div class="tool-group-label">Programming</div>
+        <div class="pill-row">
+          <span class="pill">MATLAB / Simulink</span>
+          <span class="pill">Python</span>
+          <span class="pill">Modelica (Dymola)</span>
+        </div>
+      </div>
+      <div>
+        <div class="tool-group-label">CFD</div>
+        <div class="pill-row">
+          <span class="pill">ANSYS CFX</span>
+          <span class="pill">ANSYS Fluent</span>
+          <span class="pill">STAR-CCM+</span>
+        </div>
+      </div>
+      <div>
+        <div class="tool-group-label">FEA &amp; CAD</div>
+        <div class="pill-row">
+          <span class="pill">Nastran / HyperMesh</span>
+          <span class="pill">CATIA V5</span>
+          <span class="pill">SolidWorks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section-wrap">
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02 —</span>
+    <h2 class="section-title">Experience</h2>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-period">Jun 2024 — May 2026</div>
+        <div class="exp-company">BMW Group</div>
+        <div class="exp-location">Munich, Germany</div>
+      </div>
+      <div>
+        <div class="exp-role">Working Student — Simulation Engineering, R&amp;D Power Systems</div>
+        <ul class="exp-bullets">
+          <li>Developed and refined system-level thermal-electrical models in Modelica (Dymola) to simulate power system behaviour under dynamic operating conditions.</li>
+          <li>Built multi-domain component models enabling analysis of system interactions and failure scenarios in vehicle energy networks.</li>
+          <li>Analysed measurement data (MATLAB, Excel) to characterise thermal and electrical behaviour of power electronic components.</li>
+          <li>Performed model calibration and parameter optimisation against experimental data, reducing test–model deviation.</li>
+          <li>Generated model-based training datasets for neural ODE system identification using Simulink.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-period">Aug 2023 — May 2024</div>
+        <div class="exp-company">FORVIA HELLA</div>
+        <div class="exp-location">Lippstadt, Germany</div>
+      </div>
+      <div>
+        <div class="exp-role">Intern — Thermal Engineering, R&amp;D Automotive Headlamps</div>
+        <ul class="exp-bullets">
+          <li>Advanced a Modelica-based simulation model for automotive headlamp design, improving system-level thermal analysis.</li>
+          <li>Extended the model to capture convective heat transfer and internal flow phenomena, increasing physical accuracy.</li>
+          <li>Validated simulation results against CFD analyses, ensuring consistency between reduced-order and high-fidelity models.</li>
+          <li>Assessed model transferability across headlamp architectures; conducted parameter studies and sensitivity analyses.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-period">Jul — Sep 2020</div>
+        <div class="exp-company">Brüll + Gruber GmbH</div>
+        <div class="exp-location">Munich, Germany</div>
+      </div>
+      <div>
+        <div class="exp-role">Intern — Manufacturing Engineering, Metallurgy Processes</div>
+        <ul class="exp-bullets">
+          <li>Operated manual and CNC machining tools, gaining hands-on production experience.</li>
+          <li>Applied knowledge of tolerances, fabrication limits, and design-for-manufacturing principles.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- EDUCATION -->
+<div class="section-wrap">
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">04 —</span>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="edu-list">
+    <div class="edu-item">
+      <div class="edu-period">Apr 2025 — Present</div>
+      <div>
+        <div class="edu-degree">M.Sc. Aerospace Engineering</div>
+        <div class="edu-school">Technical University of Munich</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-period">Graduated 2025</div>
+      <div>
+        <div class="edu-degree">B.Sc. Mechanical Engineering</div>
+        <div class="edu-school">Technical University of Munich</div>
+        <div class="edu-thesis">Thesis: Modelling of Convective Heat Transfer in Automotive Headlamps for Simulation-Based Design</div>
+      </div>
+    </div>
+  </div>
+
+<!-- PROJECTS -->
+<div class="section-wrap">
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03 —</span>
+    <h2 class="section-title">Aerospace Projects</h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-year">2026</div>
+      <span class="project-tag">CAD · Aircraft Design</span>
+      <div class="project-title">Beechcraft B58 Full Assembly</div>
+      <div class="project-desc">Full aircraft model in CATIA V5 — fuselage, empennage, nacelle and propeller — with detailed engineering drawings.</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2026</div>
+      <span class="project-tag">CFD · Turbomachinery</span>
+      <div class="project-title">Axial Compressor Aerodynamic Analysis</div>
+      <div class="project-desc">2D and 3D CFD in ANSYS CFX. Blade loading evaluation and comparative study on reduced stator count and flow efficiency.</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2025</div>
+      <span class="project-tag">Space Mission Design</span>
+      <div class="project-title">Lunar IoT Satellite Constellation</div>
+      <div class="project-desc">Thermal control strategies for a lunar satellite constellation, analysing eclipse periods and power constraints. Target: temperatures below 35 °C.</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2025</div>
+      <span class="project-tag">Aerodynamics</span>
+      <div class="project-title">Wind Tunnel Static Stability Experiment</div>
+      <div class="project-desc">Pressure and force measurements assessing aerodynamic performance and static stability with and without horizontal stabiliser.</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2022</div>
+      <span class="project-tag">Materials · CFD</span>
+      <div class="project-title">Turbine Blade — Additive Manufacturing</div>
+      <div class="project-desc">Material selection under combined thermal and mechanical loads. Geometry in SolidWorks, flow analysis in ANSYS Fluent.</div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+
+
+  <div class="teams-label">Student Engineering Teams</div>
+  <div class="teams-grid">
+    <div class="team-card">
+      <div class="team-period">Apr – Sep 2025</div>
+      <div class="team-name">Impetus Sailing Team</div>
+      <div class="team-role">Manufacturing Team Member</div>
+      <div class="team-desc">Helped build a student-designed high-performance sailing boat using lightweight structural materials.</div>
+    </div>
+    <div class="team-card">
+      <div class="team-period">May – Dec 2024</div>
+      <div class="team-name">Phantum Student Club</div>
+      <div class="team-role">Propulsion Team Member</div>
+      <div class="team-desc">Developed a high-performance UAV; conceptual afterburner design and water-injection system in SolidWorks for thrust augmentation.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">05 —</span>
+    <h2 class="section-title">Get in Touch</h2>
+  </div>
+  <div class="contact-grid-3col">
+    <div class="contact-text">
+      <p>Open to research collaborations, engineering discussions, and new opportunities. Whether you have a question about my work or want to explore an idea — feel free to write.</p>
+    </div>
+    <div class="contact-links">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=gabrielvirtoch@gmail.com" target="_blank" class="contact-row">
+        <span class="contact-row-key">Email</span>
+        <span>gabrielvirtoch@gmail.com ↗</span>
+      </a>
+      <a href="tel:+4915737310464" class="contact-row">
+        <span class="contact-row-key">Phone</span>
+        <span>+49 157 37310464</span>
+      </a>
+      <a href="https://github.com/gabrielvirto/gabriel.git" target="_blank" class="contact-row">
+        <span class="contact-row-key">Portfolio</span>
+        <span>github.Portfolio ↗</span>
+      </a>
+      <a href="https://www.linkedin.com/in/gabrielvirto" target="_blank" class="contact-row">
+        <span class="contact-row-key">LinkedIn</span>
+        <span> gabrielvirto ↗</span>
+      </a>
+    </div>
+    <div class="contact-photo-col">
+      <div class="contact-photo-inner">
+      <img src="images/hungary.jpg" alt="Gabriel Virto Hungary" class="contact-photo">
+        <div class="contact-photo-caption">Budapest, Hungary</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Gabriel Virto Chirhuana</div>
+  <div class="footer-copy">© 2025 · M.Sc. Aerospace Engineering · TU Munich</div>
+</footer>
+
+</body>
+</html>
