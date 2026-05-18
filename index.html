@@ -261,6 +261,16 @@ section { padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
   border-bottom: 1px solid var(--accent);
 }
 
+.edu-thesis-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-mid);
+}
+
+.edu-thesis-link:hover {
+  border-color: var(--accent);
+}
+
 /* PROJECTS */
 .projects-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -669,7 +679,13 @@ footer {
       <div>
         <div class="edu-degree">B.Sc. Mechanical Engineering</div>
         <div class="edu-school">Technical University of Munich</div>
-        <div class="edu-thesis">Thesis: Modelling of Convective Heat Transfer in Automotive Headlamps for Simulation-Based Design</div>
+        <div class="edu-thesis">Thesis:
+           <a href="documents/projects/Bachelor_thesis.pdf"
+              target="_blank"
+              class="edu-thesis-link">
+              Modelling of Convective Heat Transfer in Automotive Headlamps for Simulation-Based Design
+            </a>
+        </div>
       </div>
     </div>
   </div>
